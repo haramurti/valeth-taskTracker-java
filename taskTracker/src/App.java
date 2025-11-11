@@ -20,37 +20,94 @@ public class App {
             listTasks.add(task);
             System.out.println("success adding task with id : "+task.getId()+"\n description : "+desc);
 
+        //update
         }else if (input.equals("update")){
             int idTujuan = in.nextInt();
             String updateInput = in.nextLine();
-            System.out.println("success update task with id : "+listTasks.get(idTujuan).getId()+"\n description : "+updateInput);
-            listTasks.get(idTujuan).setDesc(updateInput);
+            boolean flag = false;
+            for (int i = 0;i<listTasks.size();i++){;
+                if(idTujuan == listTasks.get(i).getId()){
+                    int id_target=listTasks.get(i).getId();
+                    listTasks.get(i).setDesc(updateInput);;
+                    System.out.println("succesfully updated task with id : "+id_target);
+                    flag=true;
+                    break;
+                }
+            }
+            if (!flag){
+                    System.out.println("Id not found");
+                }
 
+        //delete
         }else if (input.equals("delete")){
             int idTujuan = in.nextInt();
-            listTasks.remove(idTujuan);
-            System.out.println("deleted task with id : "+idTujuan);
+            boolean flag = false;
+            for (int i = 0;i<listTasks.size();i++){;
+                if(idTujuan == listTasks.get(i).getId()){
+                    int id_target=listTasks.get(i).getId();
+                    listTasks.remove(i);
+                    System.out.println("succesfully deleted task with id : "+id_target);
+                    flag=true;
+                    break;
+                }
+            }
+            if (!flag){
+                    System.out.println("Id not found");
+                }
 
         }else if (input.equals("mark-in-progress")){
             int idTujuan = in.nextInt();
-            listTasks.get(idTujuan).setStatus(status2);
-            System.out.println("Task "+idTujuan+" marked as 'in-progress'");
+            boolean flag = false;
+            for (int i = 0;i<listTasks.size();i++){;
+                if(idTujuan == listTasks.get(i).getId()){
+                    int id_target=listTasks.get(i).getId();
+                    listTasks.get(i).setStatus(status2);
+                    System.out.println("Task "+idTujuan+" marked as 'in-progress'");
+                    flag=true;
+                    break;
+                }
+            }
+            if (!flag){
+                    System.out.println("Id not found");
+                }
+            
 
         }else if (input.equals("mark-done")){
             int idTujuan = in.nextInt();
-            listTasks.get(idTujuan).setStatus(status3);
-            System.out.println("Task "+idTujuan+" marked as 'done'");
+            boolean flag = false;
+            for (int i = 0;i<listTasks.size();i++){;
+                if(idTujuan == listTasks.get(i).getId()){
+                    int id_target=listTasks.get(i).getId();
+                    listTasks.get(i).setStatus(status3);
+                    System.out.println("Task "+id_target+" marked as 'done'");
+                    flag=true;
+                    break;
+                }
+            }
+            if (!flag){
+                    System.out.println("Id not found");
+                }
 
         }else if (input.equals("to-do")){
             int idTujuan = in.nextInt();
-            listTasks.get(idTujuan).setStatus(status1);
-            System.out.println("Task "+idTujuan+"marked as 'to-do'");
+            boolean flag = false;
+            for (int i = 0;i<listTasks.size();i++){;
+                if(idTujuan == listTasks.get(i).getId()){
+                    int id_target=listTasks.get(i).getId();
+                    listTasks.get(i).setStatus(status1);
+                    System.out.println("Task "+id_target+" marked as 'to-do'");
+                    flag=true;
+                    break;
+                }
+            }
+            if (!flag){
+                    System.out.println("Id not found");
+                }
 
         }else if (input.equals("list")){
             for (int i = 0 ; i<listTasks.size();i++)
             listTasks.get(i).printAll();
         }
-        in.close();
     }
 
     }

@@ -18,6 +18,9 @@ public class App {
     }
 
     //jadi intinya disini gua bakal bikin sebuah file task tracker yang bakal mencoba ngewritenya dalam java di mana nanti dia bakal ngewritek local gitu jadi kaya ktas ktracker lokal dulu gitu jadi nantni setelah itu bisa kita lakuin terus dan terus setleah itu mungkin bisa kita coba bikin pakai bahasa javanya adhuku hari ini kita coba buka aja diulu mari kita coba lanjut beosk
+
+
+    //I genuien ely still belive this is the most important and i have donw write, tis just soo lazy to make string builder for json files
     public static void main(String[] args) throws Exception {
         String status1 = "to-do";
         String status2 = "in-progress";

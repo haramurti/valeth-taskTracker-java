@@ -1,7 +1,5 @@
 
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.time.Instant;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.io.IOException;
@@ -53,6 +51,16 @@ public class App {
         }
     }
 
+    public static int finderIndex(int idCari) {
+        for (int i = 0; i < listTasks.size(); i++) {
+            if (listTasks.get(i).getId() == idCari) {
+                return i;
+            }
+        }
+        return -1;
+
+    }
+
     public static void main(String[] args) throws Exception {
         String status1 = "to-do";
         String status2 = "in-progress";
@@ -94,21 +102,21 @@ public class App {
                 return;
             }
             int idTujuan = Integer.parseInt(args[1]);
-            String updateInput = args[2];
-            boolean flag = false;
-            for (int i = 0; i < listTasks.size(); i++) {;
-                if (idTujuan == listTasks.get(i).getId()) {
-                    int id_target = listTasks.get(i).getId();
-                    listTasks.get(i).setDesc(updateInput);;
-                    System.out.println("succesfully updated task with id : " + id_target);
-                    saveDataJSON(listTasks);
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) {
+
+            int idTarget = finderIndex(idTujuan);
+
+            //ini dipake untuk cek kalau balikin -1 jangan dipake berarti ID gada
+            if (idTarget == -1) {
+
+                // Kalau -1, berarti ga ketemu. Stop di sini.
                 System.out.println("Id not found");
+                return;
             }
+
+            String updateInput = args[2];
+            listTasks.get(idTarget).setDesc(updateInput);;
+            System.out.println("succesfully updated task with id : " + idTujuan);
+            saveDataJSON(listTasks);
 
             //delete
         } else if (input.equals("delete")) {
@@ -118,68 +126,83 @@ public class App {
             }
 
             int idTujuan = Integer.parseInt(args[1]);
-            boolean flag = false;
-            for (int i = 0; i < listTasks.size(); i++) {;
-                if (idTujuan == listTasks.get(i).getId()) {
-                    int id_target = listTasks.get(i).getId();
-                    listTasks.remove(i);
-                    System.out.println("succesfully deleted task with id : " + id_target);
-                    saveDataJSON(listTasks);
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) {
+
+            int idTarget = finderIndex(idTujuan);
+
+            //ini dipake untuk cek kalau balikin -1 jangan dipake berarti ID gada
+            if (idTarget == -1) {
+
+                // Kalau -1, berarti ga ketemu. Stop di sini.
                 System.out.println("Id not found");
+                return;
             }
+
+            listTasks.remove(idTarget);
+            System.out.println("succesfully deleted task with id : " + idTujuan);
+            saveDataJSON(listTasks);
+
         } else if (input.equals("mark-in-progress")) {
+            if (args.length < 2) {
+                System.out.println("Failed: need ID?");
+                return;
+            }
             int idTujuan = Integer.parseInt(args[1]);
-            boolean flag = false;
-            for (int i = 0; i < listTasks.size(); i++) {;
-                if (idTujuan == listTasks.get(i).getId()) {
-                    int id_target = listTasks.get(i).getId();
-                    listTasks.get(i).setStatus(status2);
-                    System.out.println("Task " + id_target + " marked as 'in-progress'");
-                    saveDataJSON(listTasks);
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) {
+
+            int idTarget = finderIndex(idTujuan);
+
+            //ini dipake untuk cek kalau balikin -1 jangan dipake berarti ID gada
+            if (idTarget == -1) {
+
+                // Kalau -1, berarti ga ketemu. Stop di sini.
                 System.out.println("Id not found");
+                return;
             }
+
+            listTasks.get(idTarget).setStatus(status2);
+            System.out.println("Task " + idTujuan + " marked as 'in-progress'");
+            saveDataJSON(listTasks);
+
         } else if (input.equals("mark-done")) {
+            if (args.length < 2) {
+                System.out.println("Failed: need ID?");
+                return;
+            }
             int idTujuan = Integer.parseInt(args[1]);
-            boolean flag = false;
-            for (int i = 0; i < listTasks.size(); i++) {;
-                if (idTujuan == listTasks.get(i).getId()) {
-                    int id_target = listTasks.get(i).getId();
-                    listTasks.get(i).setStatus(status3);
-                    System.out.println("Task " + id_target + " marked as 'done'");
-                    saveDataJSON(listTasks);
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) {
+
+            int idTarget = finderIndex(idTujuan);
+
+            //ini dipake untuk cek kalau balikin -1 jangan dipake berarti ID gada
+            if (idTarget == -1) {
+
+                // Kalau -1, berarti ga ketemu. Stop di sini.
                 System.out.println("Id not found");
+                return;
             }
+
+            listTasks.get(idTarget).setStatus(status3);
+            System.out.println("Task " + idTujuan + " marked as 'done'");
+            saveDataJSON(listTasks);
+
         } else if (input.equals("to-do")) {
+            if (args.length < 2) {
+                System.out.println("Failed: need ID?");
+                return;
+            }
             int idTujuan = Integer.parseInt(args[1]);
-            boolean flag = false;
-            for (int i = 0; i < listTasks.size(); i++) {;
-                if (idTujuan == listTasks.get(i).getId()) {
-                    int id_target = listTasks.get(i).getId();
-                    listTasks.get(i).setStatus(status1);
-                    System.out.println("Task " + id_target + " marked as 'to-do'");
-                    saveDataJSON(listTasks);
-                    flag = true;
-                    break;
-                }
-            }
-            if (!flag) {
+
+            int idTarget = finderIndex(idTujuan);
+
+            //ini dipake untuk cek kalau balikin -1 jangan dipake berarti ID gada
+            if (idTarget == -1) {
+
+                // Kalau -1, berarti ga ketemu. Stop di sini.
                 System.out.println("Id not found");
+                return;
             }
+            listTasks.get(idTarget).setStatus(status1);
+            System.out.println("Task " + idTujuan + " marked as 'to-do'");
+            saveDataJSON(listTasks);
+
         } else if (input.equals("list")) {
             for (int i = 0; i < listTasks.size(); i++) {
                 listTasks.get(i).printAll();

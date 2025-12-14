@@ -204,8 +204,20 @@ public class App {
             saveDataJSON(listTasks);
 
         } else if (input.equals("list")) {
+
+            String filterStatus = "all";
+
+            if (args.length > 1) {
+                filterStatus = args[1];
+            }
+
             for (int i = 0; i < listTasks.size(); i++) {
-                listTasks.get(i).printAll();
+                Task t = listTasks.get(i);
+                if (filterStatus.equals("all")) {
+                    t.printAll();
+                } else if (t.getStatus().equalsIgnoreCase(filterStatus)) {
+                    t.printAll();
+                }
             }
         }
 
